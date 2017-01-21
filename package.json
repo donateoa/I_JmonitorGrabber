@@ -3,13 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-"scripts": {
+  "scripts": {
     "start": "npm run build:live",
     "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./index.ts"
   },
-  "keywords": [],
-  "author": "",
+ "author": "alessandro.donateo@gmail.com",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/donateoa/I_MonitorJmonitor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/donateoa/I_MonitorJmonitor/issues"
+  },
+  "homepage": "https://github.com/donateoa/I_MonitorJmonitor",
   "devDependencies": {
     "@types/node": "^7.0.0",
     "nodemon": "^1.11.0",
