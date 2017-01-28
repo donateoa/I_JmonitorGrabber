@@ -9,7 +9,7 @@ import {SbobetImpl} from './src/sbobetImpl'
 
 //do put
 var grabber = new Grabber();
-var bookmaker:Bookmaker = myAppConfig.bookmaker;
+var bookmaker:Bookmaker = {id: myAppConfig.jmonitor_bookmaker_id, name:myAppConfig.name};
 var betradarId=1;
 var bookmakers:Bookmaker[] = [];
 bookmakers.push(bookmaker);

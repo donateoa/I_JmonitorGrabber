@@ -1,5 +1,5 @@
 
-import {Grabber, IOptions} from '../jmonitor-interface';
+import {Grabber, Options} from '../jmonitor-interface';
 var myAppConfig = require('../jgrabber.json');
 
 //configure i_log with module name 
