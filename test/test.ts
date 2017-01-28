@@ -1,14 +1,21 @@
 /// <reference path="../typings/globals/mocha/index.d.ts" />
-import {IOptions} from '../node_modules/jmonitor-interface';
-var myAppConfig = require('../I_Jmonitor.json');
 
-var expect = require('chai').expect;
+import {Bookmaker, Grabber, Fixture, Options, OptionsPost} from '../jmonitor-interface'
 
-describe('Configuration check', function() {
+var myAppConfig = require('../jgrabber.json');
+var chai = require('chai')
+  , chaiHttp = require('chai-http');
 
-    it('jmonitorOptions must be an IOption object ', function createFixture() {
-            expect(myAppConfig.jmonitorOptions).to.be.a('object');
-            expect(myAppConfig).to.have.property('jmonitorOptions');
+chai.use(chaiHttp);
+var expect = chai.expect;
+
+describe('mandotary parameter check ', function() {
+var grabber = new Grabber();
+
+    it('check uri for jmonitor', function createFixture() {
+            expect(
+                    new Options(myAppConfig.sbobet_program_uri)
+                ).to.have.property('uri');
     });
 
 });

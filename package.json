@@ -28,9 +28,11 @@
   },
   "dependencies": {
     "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
     "i-log": "^1.1.5",
     "jmonitor-interface": "git+https://github.com/donateoa/jmonitor-interface.git/",
-    "node-rest-client": "^2.0.1",
+    "request": "^2.79.0",
+    "request-promise": "^4.1.1",
     "typescript": "^2.1.5"
   }
 }

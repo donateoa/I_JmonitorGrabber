@@ -1,9 +1,13 @@
+/// <reference path="../typings/globals/mocha/index.d.ts" />
 "use strict";
-var myAppConfig = require('../I_Jmonitor.json');
-var expect = require('chai').expect;
-describe('Configuration Check', function () {
-    it('jmonitorOptions must be an IOption object ', function createFixture() {
-        expect(myAppConfig.jmonitorOptions).to.be.a('object');
-        expect(myAppConfig).to.have.property('jmonitorOptions');
+var jmonitor_interface_1 = require("../jmonitor-interface");
+var myAppConfig = require('../jgrabber.json');
+var chai = require('chai'), chaiHttp = require('chai-http');
+chai.use(chaiHttp);
+var expect = chai.expect;
+describe('mandotary parameter check ', function () {
+    var grabber = new jmonitor_interface_1.Grabber();
+    it('check uri for jmonitor', function createFixture() {
+        expect(new jmonitor_interface_1.Options(myAppConfig.sbobet_program_uri)).to.have.property('uri');
     });
 });

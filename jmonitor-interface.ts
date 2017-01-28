@@ -1,72 +1,61 @@
 //require rest for Grabber Class;
-var Client = require('node-rest-client').Client;
-
-export interface IOptions{
-    host:string;
-    path:string;
-    header:string;
-}
-export interface IGrabber{
-    doGet(options:IOptions, cb): void;
-    doPut(options:IOptions, data, cb): void;
-}
-
-export class Grabber implements IGrabber{
-    constructor(public JmonitorOption:IOptions){};
-    doGet = (options:IOptions, cb):void => {
-        let client = new Client();
-        let req = client.get("http://remote.site/rest/xml/method", function (data, response) {
-            // parsed response body as js object 
-            console.log(data);
-            
-        });
-
-        req.on('requestTimeout', function (req) {
-            console.log('request has expired');
-            req.abort();
-        });
-        
-        req.on('responseTimeout', function (res) {
-            console.log('response has expired');
-        
-        });
-        
-        //it's usefull to handle request errors to avoid, for example, socket hang up errors on request timeouts 
-        req.on('error', function (err) {
-            console.log('request error', err);
-        });
+var rp = require('request-promise');
+export class Options{
+    uri: string;
+    constructor(uri: string) {
+        if (uri == null) {
+            throw "uri parameter is required"
+        } else {
+            this.uri = uri
+        }
     };
+}
+export class OptionsPost extends Options{
+    method: string = 'POST';
+    json: boolean = true; // Automatically stringifies the body to JSON 
+    body: any;
+    constructor(uri:string) {
+        super(uri);
+    }
+}
 
-    doPut = (options: IOptions, data:Fixture, callback) => {
-        let client = new Client();
-        var args = {
-             headers: {
-                    "Content-Type": "application/json"
-                },
-                data: data,
-            };
-        let req = client.put(options.host +options.path, args, function (data, response) {
-            // parsed response body as js object 
-            console.log(data);
-           
-        });
 
-        req.on('requestTimeout', function (req) {
-            console.log('request has expired');
-            req.abort();
-        });
-        
-        req.on('responseTimeout', function (res) {
-            console.log('response has expired');
-        
-        });
-        
-        //it's usefull to handle request errors to avoid, for example, socket hang up errors on request timeouts 
-        req.on('error', function (err) {
-            console.log('request error', err);
-        });
+export class Grabber {
+    httpJqueryPage =()=>{
+        /*TODO: require further study to understand if is possible crawl a page and use JQuery 
+        Example from npm https://www.npmjs.com/package/request-promise.
+
+       var cheerio = require('cheerio'); // Basically jQuery for node.js 
+ 
+        var options = {
+            uri: 'http://www.google.com',
+            transform: function (body) {
+                return cheerio.load(body);
+            }
         };
+        
+        rp(options)
+            .then(function ($) {
+                // Process html like you would with jQuery... 
+            })
+            .catch(function (err) {
+                // Crawling failed or Cheerio choked... 
+            });
+            */
+    }
 
+    httpCall = (options: Options, cb, data?:Fixture) => {
+        console.log("recived options ", options);
+            rp(options)
+                .then(function (htmlString) {
+                    console.log(htmlString); 
+                })
+                .catch(function (err) {
+                    // Crawling failed... 
+                    console.log(err);
+                    cb('Error. Call to ' + options.uri + ' failed');
+                });
+    }
 }
 
 export class Bookmaker{
@@ -87,7 +76,7 @@ export class Sign {
 
     constructor(name:string){ this.name = name;}
     
-    setPrice =(x:number): boolean =>{
+    setPrice = (x:number): boolean =>{
         if(this.oldPrice!=this.price) this.changed = true;
         else this.changed = false;
         this.oldPrice = this.price;
