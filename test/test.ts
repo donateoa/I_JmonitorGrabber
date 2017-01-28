@@ -9,13 +9,22 @@ var chai = require('chai')
 chai.use(chaiHttp);
 var expect = chai.expect;
 
-describe('mandotary parameter check ', function() {
-var grabber = new Grabber();
+describe('mandotary parameters check:', function() {
 
-    it('check uri for jmonitor', function createFixture() {
-            expect(
-                    new Options(myAppConfig.sbobet_program_uri)
-                ).to.have.property('uri');
+    it('jmonitor_post_data_uri', function createFixture() {
+        expect(
+            new Options(myAppConfig.jmonitor_post_data_uri)
+        ).to.have.property('uri');
     });
-
+    it('sbobet_odds_uri', function createFixture() {
+        expect(
+            new Options(myAppConfig.sbobet_odds_uri)
+        ).to.have.property('uri');
+    });
+    it('sbobet_program_uri', function createFixture() {
+        expect(
+            new Options(myAppConfig.sbobet_program_uri)
+        ).to.have.property('uri');
+    });   
+    
 });

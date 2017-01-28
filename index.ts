@@ -26,11 +26,8 @@ if(myAppConfig.jmonitor_post_data_uri ==null) {
 }
 */
 
-if(myAppConfig.sbobet_program_uri == null) {
-    console.error("Configuration key sbobet_program_uri is undefined or null in jgrabber.json");
-} else {
+
     grabber.httpCall(
         new Options(myAppConfig.sbobet_program_uri), 
         SbobetImpl.handlerProgram
         );
-}

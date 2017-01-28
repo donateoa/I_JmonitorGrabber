@@ -5,9 +5,14 @@ var myAppConfig = require('../jgrabber.json');
 var chai = require('chai'), chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 var expect = chai.expect;
-describe('mandotary parameter check ', function () {
-    var grabber = new jmonitor_interface_1.Grabber();
-    it('check uri for jmonitor', function createFixture() {
+describe('mandotary parameters check:', function () {
+    it('jmonitor_post_data_uri', function createFixture() {
+        expect(new jmonitor_interface_1.Options(myAppConfig.jmonitor_post_data_uri)).to.have.property('uri');
+    });
+    it('sbobet_odds_uri', function createFixture() {
+        expect(new jmonitor_interface_1.Options(myAppConfig.sbobet_odds_uri)).to.have.property('uri');
+    });
+    it('sbobet_program_uri', function createFixture() {
         expect(new jmonitor_interface_1.Options(myAppConfig.sbobet_program_uri)).to.have.property('uri');
     });
 });
