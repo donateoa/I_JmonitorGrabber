@@ -26,8 +26,8 @@ if(myAppConfig.jmonitor_post_data_uri ==null) {
 }
 */
 
-
+var sbobet:SbobetImpl = new SbobetImpl();
     grabber.httpCall(
         new Options(myAppConfig.sbobet_program_uri), 
-        SbobetImpl.handlerProgram
+        sbobet.handlerProgram
         );
