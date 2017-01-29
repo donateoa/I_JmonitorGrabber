@@ -9,24 +9,33 @@ export class  SbobetImpl{
 	private token: string;
 	constructor(){};
 	setDynamicjs= (htmlString:string) =>{
-		var s: string = 'euro-dynamic.js';
-		var start = htmlString.indexOf(s);
-		var end =htmlString.indexOf(">",start);
-		this.dynamicjs = htmlString.substring(start, end-1);
-		mylog.info("get token:", this.dynamicjs); 
-		return this.dynamicjs;
+		var start = htmlString.indexOf('euro-dynamic.js');
+		var end =htmlString.indexOf('>',start);
+		this.dynamicjs = htmlString.substring(start, end -'>'.length);
+		mylog.debug("get dynamicjs:", this.dynamicjs); 
+		//assume that if the length of token is right equal to the standard it is working
+		if(this.dynamicjs.length!='euro-dynamic.js?2913a1a2'.length)
+			throw ("dynamicjs is not standard: " + this.dynamicjs);
+		else 	
+			return this.dynamicjs;
 	}
 	getDynamicjs= () => {return this.dynamicjs}
 	
 	setToken = (htmlString:string) =>{
 
 		var s: string = 'new tilib_Token([';
-		var start = htmlString.indexOf(s);
-		var end =htmlString.indexOf("])",start);
-		this.token = htmlString.substring(start+s.length, end);
-		mylog.info("get token:", this.token);
-		mylog.info("neightboard get token:", htmlString.substring(start, start+100));
-		return this.token; 
+		var start = htmlString.indexOf('new tilib_Token([');
+		start = htmlString.indexOf('],[',start);
+		start = htmlString.indexOf(",'",start);//seek first comma
+		start = htmlString.indexOf(",'",start+"',".length);//seek second comma
+		var end =htmlString.indexOf("',",start);
+		this.token = htmlString.substring(start+"',".length, end);
+		mylog.debug("get token:", this.token);
+		//assume that if the length of token is right equal to the standard it is working
+		if(this.token.length!='96445c4e'.length)
+			throw ("token is not standard: " + this.token);
+		else 
+			return this.token; 
 	}
 	getToken =()=>{return this.token};
 
