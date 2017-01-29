@@ -2,11 +2,7 @@
 import {Grabber, Options} from '../jmonitor-interface';
 var myAppConfig = require('../jgrabber.json');
 //configure i_log with module name 
-var i_log = require('i-log')('SbobetImpl');
-
-//configure i_log with module name 
-const implName ="sbobet"
-var i_log = require('i-log')('impl-' +implName);
+var mylog = require('i-log')('SbobetImpl');
 
 export namespace  SbobetImpl{
 
@@ -50,7 +46,7 @@ export namespace  SbobetImpl{
 					currentString += c;
 				}
 			}
-            i_log.debug("return list", list);
+            mylog.info("return list", list);
 			return list;
 			
 		}
@@ -62,7 +58,7 @@ export namespace  SbobetImpl{
 			console.log(err)
 		} else {
 			var odds = normalize(data);
-			i_log.info("handlerProgram", odds);
+			mylog.info("handlerProgram", odds);
 			//getOdd(odds);
 		}
 

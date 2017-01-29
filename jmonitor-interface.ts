@@ -49,8 +49,8 @@ export class Grabber {
         i_log.debug("try http call with options:", options);
             rp(options)
                 .then(function (htmlString) {
-                    i_log.debug("programHandler:", htmlString); 
-                    cb(htmlString);
+                    i_log.debug("programHandler htmlString:", htmlString); 
+                    cb(null, htmlString);
                 })
                 .catch(function (err) {
                     // Crawling failed... 
