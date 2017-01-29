@@ -1,4 +1,5 @@
-//require rest for Grabber Class;
+//configure i_log with module name 
+var i_log = require('i-log')('jmonitor-interface');
 var rp = require('request-promise');
 export class Options{
     uri: string;
@@ -44,11 +45,12 @@ export class Grabber {
             */
     }
 
-    httpCall = (options: Options, cb, data?:Fixture) => {
-        console.log("recived options ", options);
+    httpCall = (options: Options, cb) => {
+        i_log.debug("try http call with options:", options);
             rp(options)
                 .then(function (htmlString) {
-                    console.log(htmlString); 
+                    i_log.debug("programHandler:", htmlString); 
+                    cb(htmlString);
                 })
                 .catch(function (err) {
                     // Crawling failed... 

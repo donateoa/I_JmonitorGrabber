@@ -4,7 +4,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-//require rest for Grabber Class;
+//configure i_log with module name 
+var i_log = require('i-log')('jmonitor-interface');
 var rp = require('request-promise');
 var Options = (function () {
     function Options(uri) {
@@ -54,11 +55,12 @@ var Grabber = (function () {
                 });
                 */
         };
-        this.httpCall = function (options, cb, data) {
-            console.log("recived options ", options);
+        this.httpCall = function (options, cb) {
+            i_log.debug("try http call with options:", options);
             rp(options)
                 .then(function (htmlString) {
-                console.log(htmlString);
+                i_log.debug("programHandler:", htmlString);
+                cb(htmlString);
             })["catch"](function (err) {
                 // Crawling failed... 
                 console.log(err);
@@ -69,14 +71,6 @@ var Grabber = (function () {
     return Grabber;
 }());
 exports.Grabber = Grabber;
-var Bookmaker = (function () {
-    function Bookmaker(id, name) {
-        this.id = id;
-        this.name = name;
-    }
-    return Bookmaker;
-}());
-exports.Bookmaker = Bookmaker;
 var Sign = (function () {
     function Sign(name) {
         var _this = this;
