@@ -1,6 +1,14 @@
 //configure i_log with module name 
 var i_log = require('i-log')('jmonitor-interface');
 var rp = require('request-promise');
+export class Sport{
+    id:string; 
+    name:string
+    constructor(id:string, name:string){
+        this.id = id;
+        this.name = name;
+    }
+}
 export class Options{
     uri: string;
     constructor(uri: string) {
