@@ -181,11 +181,14 @@ export class  SbobetImpl{
 				
 				var fixtures:Fixture[] = _that.parseOdd(splitData(response.body));
 				mylog.debug(fixtures);
+				
 				var options:OptionsPost = new OptionsPost(myAppConfig.jmonitor_post_data_uri);
 				options.body = fixtures;
-				rp(Options).then(function(response){
+				rp(options).then(function(response){
 					_that.runOnDays(day+1);
-				});
+				}).catch(function (err) {
+					console.log(err); 
+				});;
 			});
 		}
 	}

@@ -5,16 +5,8 @@ var i_log = require('i-log')('Index');
 var myAppConfig = require('./jgrabber.json');
 //start output
 i_log.info('booting ', myAppConfig.name);
-import {Bookmaker, Grabber, Fixture, Options, OptionsPost} from './jmonitor-interface'
+import {Options} from './jmonitor-interface'
 import {SbobetImpl} from './src/sbobetImpl'
-
-//do put
-var grabber = new Grabber();
-var bookmaker:Bookmaker = {id: myAppConfig.jmonitor_bookmaker_id, name:myAppConfig.name};
-var betradarId=1;
-var bookmakers:Bookmaker[] = [];
-bookmakers.push(bookmaker);
-var fixture = new Fixture(bookmaker,betradarId,"Evento A", bookmakers,new Date());
 
 var sbobet:SbobetImpl = new SbobetImpl(0, "sbobet");
 //get the program from sbobet and parse the response
