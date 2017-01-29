@@ -11,13 +11,16 @@ export class Sport{
 }
 export class Options{
     uri: string;
+    resolveWithFullResponse:boolean= true; //force request-promice to return the whole response instead the body
+    headers:{cookie:string[]};
+
     constructor(uri: string) {
         if (uri == null) {
             throw "uri parameter is required"
         } else {
             this.uri = uri
         }
-    };
+    };    
 }
 export class OptionsPost extends Options{
     method: string = 'POST';
@@ -55,10 +58,22 @@ export class Grabber {
 
     httpCall = (options: Options, cb) => {
         i_log.debug("try http call with options:", options);
+         return   rp(options)
+                .then(function (response) {
+                    cb(null, response);
+                })
+                .catch(function (err) {
+                    // Crawling failed... 
+                    console.log(err);
+                    cb('Error. Call to ' + options.uri + ' failed');
+                });
+    }
+    httpCallWithCookie = (options: Options, cookie:String[], cb) => {
+        i_log.debug("try http call with cookie with cookie:", cookie);
+        rp.jar().set
             rp(options)
-                .then(function (htmlString) {
-                    i_log.debug("programHandler htmlString:", htmlString); 
-                    cb(null, htmlString);
+                .then(function (response) {
+                    cb(null, response);
                 })
                 .catch(function (err) {
                     // Crawling failed... 

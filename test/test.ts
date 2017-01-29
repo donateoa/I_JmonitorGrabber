@@ -26,5 +26,8 @@ describe('mandotary parameters check:', function() {
             new Options(myAppConfig.sbobet_program_uri)
         ).to.have.property('uri');
     });   
+ it('elegible_sports', function createFixture() {
+        expect(myAppConfig.elegible_sports).to.have.length.above(1);
+    }); 
     
 });
