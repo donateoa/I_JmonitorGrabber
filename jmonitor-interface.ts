@@ -144,7 +144,7 @@ export class Fixture {
     leagueId: number;
     country: string;
     contryCode: string; 
-    competitiors: Competitor[] =[];
+    competitors: Competitor[] =[];
 
     constructor(book:Bookmaker, betradarId:number, name:string, bookmakers: Bookmaker[], date: Date, league?:string, leagueId?:number){
         if (typeof league !== "undefined") this.league = league;
@@ -154,7 +154,7 @@ export class Fixture {
         this.name = name;
         this.date = date;
         for (var b of bookmakers){
-            this.competitiors.push (new Competitor(b.id, b.name));
+            this.competitors.push (new Competitor(b.id, b.name));
         }
     }
    
