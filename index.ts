@@ -16,7 +16,7 @@ rp(new Options(myAppConfig.sbobet_program_uri))
         sbobet.cookies = response.headers["set-cookie"];
         sbobet.setProgram(response.body);
           //loop on the days. start with index 0;
-        sbobet.runOnDays(1);
+        sbobet.runOnDays(0);
     });
 
 
