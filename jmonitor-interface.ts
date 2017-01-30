@@ -128,7 +128,7 @@ export class Market1X2 extends Market {
     }
 }
 
-export class Competitior {
+export class Competitor {
     market1X2: Market1X2;
     constructor(public bookmakerId: number , public name: string){
         this.market1X2 = new Market1X2();
@@ -144,7 +144,7 @@ export class Fixture {
     leagueId: number;
     country: string;
     contryCode: string; 
-    competitiors: Competitior[] =[];
+    competitiors: Competitor[] =[];
 
     constructor(book:Bookmaker, betradarId:number, name:string, bookmakers: Bookmaker[], date: Date, league?:string, leagueId?:number){
         if (typeof league !== "undefined") this.league = league;
@@ -154,7 +154,7 @@ export class Fixture {
         this.name = name;
         this.date = date;
         for (var b of bookmakers){
-            this.competitiors.push (new Competitior(b.id, b.name));
+            this.competitiors.push (new Competitor(b.id, b.name));
         }
     }
    
