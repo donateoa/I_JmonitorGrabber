@@ -87,22 +87,21 @@ export interface Bookmaker{
     id: number;
     name: string;
 }
+export function setPrice (sign:Sign, x:number): boolean {
+        if(sign.oldPrice!=sign.price) sign.changed = true;
+        else sign.changed = false;
+        sign.oldPrice = sign.price;
+        sign.price = x;
+        return sign.changed;
+    }
 
 export class Sign {
     name: string;
-    protected price: number;
+    price: number;
     oldPrice: number;
     changed: boolean = false;
 
     constructor(name:string){ this.name = name;}
-    
-    setPrice = (x:number): boolean =>{
-        if(this.oldPrice!=this.price) this.changed = true;
-        else this.changed = false;
-        this.oldPrice = this.price;
-        this.price = x;
-        return this.changed;
-    }
     
     getPrice = ()=> this.price;
 }
@@ -117,15 +116,7 @@ export class Market1X2 extends Market {
         super('1X2');
         this.signs = [ new Sign("1"), new Sign("X"), new Sign("2")];
     }
-    update = (signs: Sign[]): boolean => {
-        let changed = false;
-        for (var index in signs){
-            if (this.signs[index].name == signs[index].name)
-                changed = changed || this.signs[index].setPrice(signs[index].getPrice())
-            else throw ("Position of signs in the input array must be in the following format [1,X,2] ");
-        }
-        return changed;
-    }
+    
 }
 
 export class Competitor {

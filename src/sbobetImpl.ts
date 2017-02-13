@@ -1,5 +1,5 @@
 var rp = require('request-promise');
-import {Grabber, Options, Sport, Fixture,Bookmaker, OptionsPost} from '../jmonitor-interface';
+import {Grabber, Options, Sport, Fixture,Bookmaker, OptionsPost, setPrice} from '../jmonitor-interface';
 var myAppConfig = require('../jgrabber.json');
 //configure i_log with module name 
 var mylog = require('i-log')('SbobetImpl');
@@ -158,8 +158,11 @@ export class  SbobetImpl{
 			var betradarId: number = rows[i][2][0];
 			var eventName: string = rows[i][2][1] + " - " + rows[i][2][2];
 			var startDate: Date = rows[i][2][5];
-			var odds:any[] =rows[i][4][1][2]
-			var f = new Fixture(sbobet,betradarId,"sbobet",bookmakers,startDate);
+			var price:any[] =rows[i][4][1][2]
+			var f = new Fixture(sbobet,betradarId,eventName,bookmakers,startDate);
+			for (var ii=0;ii<price.length;ii++){
+				setPrice(f.competitors[0].market1X2.signs[ii],price[ii]);
+			}
 			fixtures.push(f);
 			//each event contains 1x2 and handicap, for the moment we get just 1X2
 			mylog.info(f);
@@ -169,7 +172,6 @@ export class  SbobetImpl{
 
 
 	 runOnDays = (day:number) =>{
-		console.log(day);
 		if(day>1) return; //Change here to check the exit condition. Note: sbobet manage max 8 days!
 		else {
 			var _that = this;
