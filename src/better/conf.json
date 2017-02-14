@@ -1,6 +1,17 @@
 {
-    "name": "sbobet",
-	"sbobet_program_uri":"http://www.sbobet.com/euro/football/",
-	"jmonitor_post_data_uri": "http://127.0.0.1:5001/sbobet",
+    "name": "better",
+    "optionsProgram":{
+        "uri": "http://scommesse.lottomatica.it/ww-adapter/api/v1/cnom/navigation/depth/317",
+         "headers":{"context": "2:0:en_US"
+         }
+    },
+    "optionsLeague":{
+        "uri": "https://scommesse.lottomatica.it/ww-adapter/api/v3/cnom/node/#leagueId#/categorymarkettype",
+         "headers":{"context": "2:0:en_US"
+         }
+    },
+    
+
+	"jmonitor_post_data_uri": "http://127.0.0.1:5001/better",
     "jmonitor_bookmaker_id": 1
 }

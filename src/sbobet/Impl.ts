@@ -1,6 +1,7 @@
-import { Observable} from 'rxjs/Rx';
+import { Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/range';
 import 'rxjs/add/observable/interval';
+import 'rxjs/add/observable/timer';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/map';
@@ -29,9 +30,10 @@ Intent:
 */
 
 var stream1 = Observable.
-    interval(10*60*1000).
-    flatMap(i => Promise({uri: myAppConfig.sbobet_program_uri})).
-    map (r => {return {
+    timer(0, 10*60*1000).
+    flatMap(i => Promise(myAppConfig.optionsProgram)).
+    map (r => {
+        return {
         'cookies' : r['headers']['set-cookie'], 
         'token' : parseToken(r['body'])
     }});
@@ -58,7 +60,7 @@ this is the output of two streams
 - - - [C,T,S] - - - - - [C,T,S] - - - - - [C,T,S] - - - - - [C,T,S] - - 
 - - T - - T1 - - T2 - - T3 - - T4 - - T5 - - T6 - - T7
 
-and we would have 'combineLatest(f)': becouse we can use latest stream1.token for each stream2.
+and we would have 'combineLatest(f)': becouse we can use latest stream1.token for each stream2 during all 10 minutes range.
  - -[C,T,S],T - - [C,T,S],T1 - - [C,T,S],T2 - - [C,T,S],T3 - - [C,T,S],T4 - - [C,T,S],T5-->
 token will be refreshed each 10 minutes.
  - - -U - U1 - U2 - U3 - U4 - U5 - U6 - U7
@@ -88,9 +90,9 @@ var requestStream = urlStream.
 requestStream.
 subscribe(r =>  Promise({
                 uri: myAppConfig.jmonitor_post_data_uri,
-                action: 'POST',
-                body: JSON.stringify(r)})
-               ,
+                method: 'POST',
+                json: true,
+                body: r}),
            error => console.error(error),
            () => console.log('done'));
 
