@@ -13,7 +13,8 @@ var myAppConfig = require('./conf.json');
 var Promise = require("request-promise");
 import {parseToken, getDateByIndex, headerInfo, parseUrl} from './utility'
 
-export function run(){
+export function runSbobet(){
+    console.log("start sbobet implementation")
 /*
 In order to get the price from sbobet we have to set the header of each request with
 - cookie

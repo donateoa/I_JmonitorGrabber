@@ -1,4 +1,20 @@
+import {runSbobet} from './src/sbobet/Impl'
+var grabber: string = "sbobet"
+process.argv.forEach(function (val, index, array) {
+    if (val.indexOf("sbobet")>=0) grabber = "sbobet";
+    else if (val.indexOf("better")>=0) grabber = "better";
+    else if (val.indexOf("intralot")>=0) grabber = "intralot";
+    else if (val.indexOf("matchpoint")>=0) grabber = "matchpoint";
+    else if (val.indexOf("snai")>=0) grabber = "snai";
+    else if (val.indexOf("williamhill")>=0) grabber = "williamhill";
+});
 
-import {run} from './src/sbobet/Impl'
+switch (grabber) {
+    case "sbobet":
+        runSbobet()
+        break;
 
-run();
+    default:
+        break;
+}
+//run();
