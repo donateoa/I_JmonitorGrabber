@@ -33,6 +33,7 @@
     "jmonitor-interface": "git+https://github.com/donateoa/jmonitor-interface.git/",
     "request": "^2.79.0",
     "request-promise": "^4.1.1",
+    "rxjs": "^5.1.1",
     "typescript": "^2.1.5"
   }
 }

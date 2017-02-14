@@ -1,6 +1,3 @@
-//configure i_log with module name 
-var i_log = require('i-log')('jmonitor-interface');
-var rp = require('request-promise');
 export class Sport{
     id:string; 
     name:string
@@ -31,57 +28,6 @@ export class OptionsPost extends Options{
     }
 }
 
-
-export class Grabber {
-    httpJqueryPage =()=>{
-        /*TODO: require further study to understand if is possible crawl a page and use JQuery 
-        Example from npm https://www.npmjs.com/package/request-promise.
-
-       var cheerio = require('cheerio'); // Basically jQuery for node.js 
- 
-        var options = {
-            uri: 'http://www.google.com',
-            transform: function (body) {
-                return cheerio.load(body);
-            }
-        };
-        
-        rp(options)
-            .then(function ($) {
-                // Process html like you would with jQuery... 
-            })
-            .catch(function (err) {
-                // Crawling failed or Cheerio choked... 
-            });
-            */
-    }
-
-    httpCall = (options: Options, cb) => {
-        i_log.debug("try http call with options:", options);
-         return   rp(options)
-                .then(function (response) {
-                    cb(null, response);
-                })
-                .catch(function (err) {
-                    // Crawling failed... 
-                    console.log(err);
-                    cb('Error. Call to ' + options.uri + ' failed');
-                });
-    }
-    httpCallWithCookie = (options: Options, cookie:String[], cb) => {
-        i_log.debug("try http call with cookie with cookie:", cookie);
-        rp.jar().set
-            rp(options)
-                .then(function (response) {
-                    cb(null, response);
-                })
-                .catch(function (err) {
-                    // Crawling failed... 
-                    console.log(err);
-                    cb('Error. Call to ' + options.uri + ' failed');
-                });
-    }
-}
 
 export interface Bookmaker{
     id: number;

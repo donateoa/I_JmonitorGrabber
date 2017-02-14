@@ -1,0 +1,6 @@
+{
+    "name": "sbobet",
+	"sbobet_program_uri":"http://www.sbobet.com/euro/basketball/",
+	"jmonitor_post_data_uri": "http://127.0.0.1:5001/sbobet",
+    "jmonitor_bookmaker_id": 1
+}
