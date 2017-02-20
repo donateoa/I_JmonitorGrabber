@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/combineLatest'
 import 'rxjs/add/operator/merge'
 import 'rxjs/add/observable/of'
+var i_log = require('i-log')('sbobet');
 
 
 var myAppConfig = require('./conf.json');
@@ -14,7 +15,7 @@ var Promise = require("request-promise");
 import {getUriByLagueId,  parseOdd} from './utility'
 
 export function runBetter(){
-    console.log("start Better implementation")
+    i_log.info("start Better implementation")
 /*
 Intent:
 - create strem1 with observable<programJSON> that emit value each 10 minutes, 
@@ -56,7 +57,9 @@ var delayedStream = stream1.
 
 delayedStream.
     subscribe(r =>  {
-        console.log("****************************")
+        i_log.debug("********************************************************************************")
+        i_log.debug("*********************************** BETTER FIXTURE *****************************")
+        i_log.debug("********************************************************************************")
         var fixture = parseOdd(r);
         Promise({
                 uri: myAppConfig.jmonitor_post_data_uri,
@@ -64,11 +67,11 @@ delayedStream.
                 json: true,
                 body: fixture})
 
-        console.log(fixture);
+        i_log.debug(fixture);
        
        
     },
     error => console.error(error),
-    () => console.log('get program done'));
+    () => i_log.info('get program done'));
 
 }

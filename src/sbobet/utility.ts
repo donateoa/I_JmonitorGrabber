@@ -31,14 +31,16 @@ export 	function parseOdd (list:any[]):Fixture[] {
 			var betradarId: number = rows[i][2][0];
 			var eventName: string = rows[i][2][1] + " - " + rows[i][2][2];
 			var startDate: Date = rows[i][2][5];
-			var price:any[] =rows[i][4][1][2]
+			if (!rows[i][4] || !rows[i][4][2]) continue;
+			var price:any[] =rows[i][4][2][2]
+			console.log(price);
 			var f = new Fixture(sbobet,betradarId,eventName,bookmakers,startDate);
 			for (var ii=0;ii<price.length;ii++){
 				setPrice(f.competitors[0].market1X2.signs[ii],price[ii]);
 			}
 			fixtures.push(f);
 			//each event contains 1x2 and handicap, for the moment we get just 1X2
-			mylog.info(f);
+			mylog.debug(f);
 		}
 		return fixtures;
 	}
@@ -96,14 +98,18 @@ export function splitData (stringData:String):any[]{
 
 export function getDateByIndex (index:number):string  {
 		index = index%8;
-		var d:Date = new Date();
-		d.setDate(d.getDate() + index);
-		var srtingMonth = ("00" + (d.getMonth()+1));
-		var srtingDay = ("00" + d.getDate());
-		srtingMonth = srtingMonth.substring(srtingMonth.length-2);
-		srtingDay = srtingDay.substring(srtingDay.length-2);
-		var stringDate = d.getFullYear() + srtingMonth+srtingDay;
-		return stringDate;
+		if(index==0) return '';
+		else if(index==7) return 'more';
+		else{
+			var d:Date = new Date();
+			d.setDate(d.getDate() + index);
+			var srtingMonth = ("00" + (d.getMonth()+1));
+			var srtingDay = ("00" + d.getDate());
+			srtingMonth = srtingMonth.substring(srtingMonth.length-2);
+			srtingDay = srtingDay.substring(srtingDay.length-2);
+			var stringDate = d.getFullYear() +'-' +srtingMonth+'-'+srtingDay;
+			return stringDate;
+		}
 	};
 
 
