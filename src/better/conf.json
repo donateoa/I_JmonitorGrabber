@@ -12,6 +12,7 @@
     },
     
 
-	"jmonitor_post_data_uri": "http://127.0.0.1:5001/grabber/better",
+	"jmonitor_post_data_uri": "http://127.0.0.1:5001/grabber/key/better",
     "jmonitor_bookmaker_id": 1
 }
+

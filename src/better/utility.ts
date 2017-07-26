@@ -32,7 +32,9 @@ export 	function parseOdd (event:any):Fixture {
 		var market = event.eventMarketGroups.
 					map (r=> r.detailedMarkets);
 		var merged = [].concat.apply([], market).		
-					filter(f=> f.marketTypeId=="FBL0N03WNSCFT")[0].selections;
+					filter(f=> f.marketTypeId=="FBL0N03WNSCFT");
+		if(merged.length<=0) merged=[];			
+		else merged=merged[0].selections;
 		var selections = merged.map(r => {return {'name': r.name, 'price': r.priceValues.filter(f => f.formatId=="DECIMAL")[0].formatValue}})
 		f.competitors[0].market1X2.signs = selections;
 		

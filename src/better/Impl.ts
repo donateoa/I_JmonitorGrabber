@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/combineLatest'
 import 'rxjs/add/operator/merge'
 import 'rxjs/add/observable/of'
-var i_log = require('i-log')('sbobet');
+var i_log = require('i-log')('better');
 
 
 var myAppConfig = require('./conf.json');
@@ -57,10 +57,7 @@ var delayedStream = stream1.
 
 delayedStream.
     subscribe(r =>  {
-        i_log.debug("********************************************************************************")
-        i_log.debug("*********************************** BETTER FIXTURE *****************************")
-        i_log.debug("********************************************************************************")
-        var fixture = parseOdd(r);
+         var fixture = parseOdd(r);
         Promise({
                 uri: myAppConfig.jmonitor_post_data_uri,
                 method: 'POST',
