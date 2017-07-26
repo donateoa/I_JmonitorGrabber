@@ -4,6 +4,6 @@
         "uri": "http://www.sbobet.com/euro/football/",
          "resolveWithFullResponse": true
     },
-	"jmonitor_post_data_uri": "http://127.0.0.1:5001/grabber/sbobet",
+	"jmonitor_post_data_uri": "http://127.0.0.1:5001/grabber/list/sbobet",
     "jmonitor_bookmaker_id": 0
 }
